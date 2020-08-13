@@ -2,6 +2,7 @@ import 'package:charts/Cards/category_card.dart';
 import 'package:charts/Cards/category_card_list.dart';
 import 'package:charts/CheckList/checklist.dart';
 import 'package:charts/PDFs/pdf_generator.dart';
+import 'package:charts/Slivers/slivers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
