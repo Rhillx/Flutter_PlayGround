@@ -1,7 +1,9 @@
-import 'package:charts/barchart.dart';
-import 'package:charts/linechart.dart';
-import 'package:charts/piechart.dart';
+import 'package:charts/Cards/category_card.dart';
+import 'package:charts/Cards/category_card_list.dart';
+import 'package:charts/CheckList/checklist.dart';
+import 'package:charts/PDFs/pdf_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,22 +39,6 @@ class MyPlayGround extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(child: PieChartExample()),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(child: LineChartExample()),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(child: BarChartExample()),
-          ),
-        ],
-      ),
-    );
+        backgroundColor: Colors.grey[300], body: CategortyCardList());
   }
 }
