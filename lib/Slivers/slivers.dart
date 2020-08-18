@@ -27,8 +27,20 @@ class _SliversPlayState extends State<SliversPlay> {
         decoration: InputDecoration(hintText: 'Enter Task or Note'),
       ),
       actions: <Widget>[
-        FlatButton(onPressed: _addTask(input.text), child: Text('Add Task')),
-        FlatButton(onPressed: _addNote(input.text), child: Text('Add Note')),
+        FlatButton(
+            onPressed: () {
+              _addTask(input.text);
+              input.text = '';
+              Navigator.pop(context);
+            },
+            child: Text('Add Task')),
+        FlatButton(
+            onPressed: () {
+              _addNote(input.text);
+              input.text = '';
+              Navigator.pop(context);
+            },
+            child: Text('Add Note')),
       ],
     );
   }
@@ -99,19 +111,33 @@ class _SliversPlayState extends State<SliversPlay> {
               child: ListView.builder(
                   itemCount: incompleteTask.length,
                   itemBuilder: (context, i) {
-                    return CheckboxListTile(
-                        title: Text(incompleteTask[i].title),
-                        value: incompleteTask[i].isChecked,
-                        onChanged: (val) {
-                          incompleteTask[i].isChecked = val;
-                          setState(() {
-                            incompleteTask.removeWhere((todo) =>
-                                todo.title == incompleteTask[i].title);
+                    var taskCheck = incompleteTask[i].isChecked;
+                    return GestureDetector(
+                      onLongPress: () {
+                        incompleteTask.removeWhere(
+                            (e) => e.title == incompleteTask[i].title);
 
-                            completedTask
-                                .add(TodoItem(incompleteTask[i].title));
-                          });
-                        });
+                        setState(() {});
+                      },
+                      child: CheckboxListTile(
+                          title: RichText(
+                            text: TextSpan(
+                                text: incompleteTask[i].title,
+                                style: TextStyle(
+                                    decoration:
+                                        incompleteTask[i].isChecked == false
+                                            ? TextDecoration.none
+                                            : TextDecoration.lineThrough,
+                                    color: taskCheck == false
+                                        ? Colors.black
+                                        : Colors.red)),
+                          ),
+                          value: incompleteTask[i].isChecked,
+                          onChanged: (val) {
+                            incompleteTask[i].isChecked = val;
+                            setState(() {});
+                          }),
+                    );
                   }))
         ],
       ),
